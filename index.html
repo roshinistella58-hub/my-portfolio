@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Roshini | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Font Awesome CDN -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --black: #0f0f14;
+  --purple: #7c3aed;
+  --white: #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ========== NAVBAR ========== */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(15,15,20,0.95);
+  display: flex;
+  justify-content: center;
+  gap: 45px;
+  padding: 14px 0;
+  z-index: 1000;
+}
+
+nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: 0.3s;
+}
+
+nav a i { font-size: 22px; }
+
+nav a:hover {
+  color: var(--purple);
+  transform: translateY(-4px);
+}
+
+/* ========== HERO ========== */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(circle at top, #1b0f2f, #0f0f14);
+  overflow: hidden;
+}
+
+/* glow follows mouse */
+.hero::after, section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x) var(--y),
+    rgba(124,58,237,0.15), transparent 40%);
+  pointer-events: none;
+  transition: background 0.2s;
+}
+
+/* bubbles animation reused in all sections */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(124,58,237,0.4); /* increased opacity */
+  box-shadow: 0 0 20px rgba(124,58,237,0.6); /* glowing effect */
+  animation: float linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(110vh); opacity: 0; }
+  to { transform: translateY(-10vh); opacity: 1; }
+}
+
+.hero-content {
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 56px;
+  color: var(--purple);
+  text-shadow: 0 0 25px rgba(124,58,237,0.8);
+}
+
+.hero p {
+  font-size: 22px;
+  margin: 20px 0 30px;
+}
+
+.hero-buttons a {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-primary { background: var(--purple); color: white; }
+.btn-outline { border: 2px solid var(--purple); color: var(--purple); }
+
+.hero-buttons a:hover { transform: scale(1.08); }
+
+/* ========== SECTIONS ========== */
+section {
+  padding: 100px 10%;
+  position: relative;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+  overflow: hidden;
+}
+
+section.visible { opacity: 1; transform: translateY(0); }
+
+.section-box {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.section-box img {
+  width: 250px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(124,58,237,0.6);
+  transition: 0.4s;
+}
+
+.section-box img:hover { transform: scale(1.06); }
+
+.section-content { max-width: 600px; }
+
+h2 {
+  color: var(--purple);
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+/* ========== SKILLS ========== */
+.skills-list span {
+  display: inline-block;
+  margin: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--purple);
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.skills-list span:hover { 
+  background: var(--purple); 
+  transform: scale(1.05); 
+}
+
+/* ========== PROJECTS ========== */
+.project {
+  background: #1a1a25;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  border-left: 4px solid var(--purple);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px rgba(124,58,237,0.6);
+}
+
+/* ========== CONTACT ========== */
+.contact a {
+  display: block;
+  color: var(--white);
+  text-decoration: none;
+  margin: 10px 0;
+  transition: color 0.3s;
+}
+
+.contact a:hover { color: var(--purple); }
+
+.contact i { color: var(--purple); margin-right: 10px; }
+
+/* ========== FOOTER ========== */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #0b0b10;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 38px; }
+  section { padding: 80px 6%; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#about"><i class="fa-solid fa-user"></i>About</a>
+  <a href="#skills"><i class="fa-solid fa-code"></i>Skills</a>
+  <a href="#projects"><i class="fa-solid fa-diagram-project"></i>Projects</a>
+  <a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <!-- bubbles -->
+  <div class="bubble" style="width:120px;height:120px;left:12%;animation-duration:18s;"></div>
+  <div class="bubble" style="width:80px;height:80px;left:32%;animation-duration:14s;"></div>
+  <div class="bubble" style="width:150px;height:150px;left:60%;animation-duration:22s;"></div>
+  <div class="bubble" style="width:60px;height:60px;left:82%;animation-duration:12s;"></div>
+
+  <div class="hero-content">
+    <h1>Welcome to My Portfolio</h1>
+    <p>
+      Hi, I’m <strong style="color:#7c3aed">Roshini Premkumar</strong><br>
+      <span id="typing"></span>
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#about" class="btn-outline">Explore</a>
+      <a href="#projects" class="btn-primary">View Projects</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-box">
+    <img src="images/profile.jpeg" alt="Profile">
+    <div class="section-content">
+      <h2>About Me</h2>
+      <p>
+       Motivated and detail-oriented 3rd-year Electronics Engineering student with a strong foundation in analog and digital electronics, circuit design, and microcontroller programming. Along with a keen interest in graphic design, I enjoy combining technical knowledge with creativity to build visually engaging and practical solutions. Passionate about applying theoretical concepts to real-world projects and continuously developing technical and creative skills through hands-on experience and coursework. Actively seeking opportunities to learn, contribute, and grow in the fields of electronics, embedded systems, and design.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-box">
+    <img src="images/skills.jpg" alt="Skills">
+    <div class="section-content">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <span>C</span><span>Java</span><span>Python</span><span>Verilog</span>
+        <span>MATLAB</span><span>Cadence</span><span>LTspice</span>
+        <span>8051</span><span>Arduino</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2>Projects</h2>
+<div class="project">
+    <h3>4:3 and 6:3 counter</h3>
+    <p>Designed and simulated 4:3 and 6:3 modulo counters using Cadence. Implemented synchronous logic for precise counting and validated functionality through waveform analysis.</p>
+  </div>
+
+  <div class="project">
+    <h3>Automatic Irrigation System</h3>
+    <p>Developed an automatic irrigation system using the 8051 microcontroller that monitors soil moisture levels and controls water supply, optimizing water usage for efficient crop irrigation.</p>
+  </div>
+
+  <div class="project">
+    <h3>Hand Following Robot</h3>
+    <p>A hand-following robot using Arduino detects and follows hand movements using ultrasonic sensors, enabling gesture-based control for interactive automation and robotics applications.</p>
+  </div>
+
+  <div class="project">
+    <h3>Fastest Finger First Circuit</h3>
+    <p>Designed a "Fastest Finger First" circuit using 555 timer to detect and lock first response input in quiz applications</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-box">
+    <img src="images/contact.jpg" alt="Contact">
+    <div class="section-content contact">
+      <h2>Contact</h2>
+      <a href="mailto:roshini.2023@vitstudent.ac.com">
+        <i class="fa-solid fa-envelope"></i>roshini.2023@vitstudent.ac.com
+      </a>
+      <a><i class="fa-solid fa-location-dot"></i>Chennai, India</a>
+    </div>
+  </div>
+</section>
+
+<footer>©Roshini Premkumar</footer>
+
+<!-- JS -->
+<script>
+// Typing effect
+const roles = ["ECE Student", "Embedded Systems Enthusiast", "Graphic Design Explorer"];
+let i = 0, j = 0;
+const typing = document.getElementById("typing");
+
+function type() {
+  if (j < roles[i].length) {
+    typing.textContent += roles[i][j++];
+    setTimeout(type, 120);
+  } else setTimeout(erase, 1400);
+}
+
+function erase() {
+  if (j > 0) {
+    typing.textContent = roles[i].substring(0, --j);
+    setTimeout(erase, 60);
+  } else {
+    i = (i + 1) % roles.length;
+    setTimeout(type, 400);
+  }
+}
+type();
+
+// Glow follows mouse
+document.addEventListener("mousemove", e => {
+  document.documentElement.style.setProperty("--x", e.clientX + "px");
+  document.documentElement.style.setProperty("--y", e.clientY + "px");
+});
+
+// Reveal sections on scroll
+const sections = document.querySelectorAll("section");
+function revealSections() {
+  const triggerBottom = window.innerHeight / 1.1;
+  sections.forEach(section => {
+    const sectionTop = section.getBoundingClientRect().top;
+    if(sectionTop < triggerBottom) section.classList.add("visible");
+  });
+}
+window.addEventListener("scroll", revealSections);
+revealSections();
+
+// Add floating bubbles to all sections
+sections.forEach(section => {
+  for(let k=0; k<3; k++){
+    const bubble = document.createElement("div");
+    bubble.classList.add("bubble");
+    bubble.style.width = `${50+Math.random()*120}px`;
+    bubble.style.height = bubble.style.width;
+    bubble.style.left = `${Math.random()*90}%`;
+    bubble.style.animationDuration = `${10+Math.random()*15}s`;
+    section.appendChild(bubble);
+  }
+});
+</script>
+
+</body>
+</html>
